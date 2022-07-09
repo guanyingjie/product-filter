@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @Data
 @Builder
 public class Labor {
-    public BigDecimal price;
+    public String name;
     public LaborType type;
 
     public enum LaborType{

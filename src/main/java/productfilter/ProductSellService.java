@@ -8,22 +8,18 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Service
 @RequiredArgsConstructor
-public class ProductSellService {
-    private final PartManagementService partManagementService;
-    private final LaborManagementService laborManagementService;
+public class ProductSellService<T> {
+//    private final PartManagementService partManagementService;
+//
+//    public List<Part> filterByType(List<Part> parts) {
+//        return partManagementService.findProductByType(parts);
+//    }
 
-    public BigDecimal calculatePartPrice(List<Part> parts) {
-        return partManagementService.findProductByType(parts).
-                stream().
-                map(Part::getPrice)
-                .reduce(BigDecimal.ZERO,BigDecimal::add);
+    private final ProductManagement<T> productManagement;
+
+    public List<T> filterByType(List<T> products){
+        return productManagement.findProductByType(products);
     }
-    public BigDecimal calculateLaborPrice(List<Labor> labors) {
-        return laborManagementService.findProductByType(labors).
-                stream().
-                map(Labor::getPrice)
-                .reduce(BigDecimal.ZERO,BigDecimal::add);
-    }
+
 }

@@ -44,7 +44,7 @@ class ProductSellServiceTest extends Specification {
                         .build(),
         )
         when:
-        BigDecimal totalPrice = produceSellService.calculateLaborPrice(labors).add(produceSellService.calculatePartPrice(parts))
+        BigDecimal totalPrice = produceSellService.calculateLaborPrice(labors).add(produceSellService.filterByTypr(parts))
 
         then:
         totalPrice == 1000

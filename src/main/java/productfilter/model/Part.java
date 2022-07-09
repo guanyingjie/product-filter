@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 @Data
 @Builder
 public class Part {
-    public BigDecimal price;
+    public String name;
     public ProductType type;
 
     public enum ProductType{

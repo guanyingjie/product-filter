@@ -17,38 +17,44 @@ public class ProductFilterApplication {
         List<Part> parts = List.of(
                 Part.builder()
                         .type(Part.ProductType.TYRE)
-                        .price(BigDecimal.valueOf(100.23))
+                        .name("tyre")
                         .build(),
                 Part.builder()
                         .type(Part.ProductType.WHEEL)
-                        .price(BigDecimal.valueOf(1033.23))
+                        .name("wheel")
                         .build(),
                 Part.builder()
                         .type(Part.ProductType.TYRE)
-                        .price(BigDecimal.valueOf(10.23))
+                        .name("tyre2")
                         .build()
         );
         List<Labor> labors = List.of(
                 Labor.builder()
                         .type(Labor.LaborType.INSTALL)
-                        .price(BigDecimal.valueOf(100.23))
+                        .name("install")
                         .build(),
                 Labor.builder()
                         .type(Labor.LaborType.REPAIR)
-                        .price(BigDecimal.valueOf(100.23))
+                        .name("repair")
                         .build(),
                 Labor.builder()
                         .type(Labor.LaborType.INSTALL)
-                        .price(BigDecimal.valueOf(100.23))
+                        .name("install2")
                         .build()
         );
-        LaborManagementService laborManagementService = new LaborManagementService();
-        PartManagementService partManagementService = new PartManagementService();
-        ProductSellService productSellService = new ProductSellService(partManagementService, laborManagementService);
 
-        BigDecimal price = productSellService.calculateLaborPrice(labors);
 
-        System.out.println("price " + price);
+//        PartManagementService partManagementService = new PartManagementService();
+//        ProductSellService productSellService = new ProductSellService(partManagementService);
+//        List<Part> filteredParts = productSellService.filterByType(parts);
+//        System.out.println("filteredParts " + filteredParts);
+
+
+        //DIP
+        ProductManagement<Labor> productManagement = new LaborManagementService();
+        ProductSellService<Labor> productSellService = new ProductSellService<>(productManagement);
+        List<Labor> filteredParts = productSellService.filterByType(labors);
+        System.out.println("filteredParts " + filteredParts);
     }
 
 }
